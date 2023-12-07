@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="lib" path="lib/animal-sniffer-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/bimclipse-reasoning-engine.jar"/>
+	<classpathentry kind="lib" path="lib/collection.jar"/>
+	<classpathentry kind="lib" path="lib/commons-cli.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec.jar"/>
+	<classpathentry kind="lib" path="lib/commons-csv.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang3.jar"/>
+	<classpathentry kind="lib" path="lib/EXPRESStoOWL.jar"/>
+	<classpathentry kind="lib" path="lib/gson.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient.jar"/>
+	<classpathentry kind="lib" path="lib/httpclient-cache.jar"/>
+	<classpathentry kind="lib" path="lib/httpcore.jar"/>
+	<classpathentry kind="lib" path="lib/ifcParserLib.jar"/>
+	<classpathentry kind="lib" path="lib/IFCtoRDF.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-annotations.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-core.jar"/>
+	<classpathentry kind="lib" path="lib/jackson-databind.jar"/>
+	<classpathentry kind="lib" path="lib/jcl-over-slf4j.jar"/>
+	<classpathentry kind="lib" path="lib/jena-arq.jar"/>
+	<classpathentry kind="lib" path="lib/jena-base.jar"/>
+	<classpathentry kind="lib" path="lib/jena-core.jar"/>
+	<classpathentry kind="lib" path="lib/jena-dboe-base.jar"/>
+	<classpathentry kind="lib" path="lib/jena-dboe-index.jar"/>
+	<classpathentry kind="lib" path="lib/jena-dboe-storage.jar"/>
+	<classpathentry kind="lib" path="lib/jena-dboe-transaction.jar"/>
+	<classpathentry kind="lib" path="lib/jena-dboe-trans-data.jar"/>
+	<classpathentry kind="lib" path="lib/jena-iri.jar"/>
+	<classpathentry kind="lib" path="lib/jena-rdfconnection.jar"/>
+	<classpathentry kind="lib" path="lib/jena-shacl.jar"/>
+	<classpathentry kind="lib" path="lib/jena-shaded-guava.jar"/>
+	<classpathentry kind="lib" path="lib/jena-shex.jar"/>
+	<classpathentry kind="lib" path="lib/jena-tdb.jar"/>
+	<classpathentry kind="lib" path="lib/jena-tdb2.jar"/>
+	<classpathentry kind="lib" path="lib/jna.jar"/>
+	<classpathentry kind="lib" path="lib/jna-platform.jar"/>
+	<classpathentry kind="lib" path="lib/jsonld-java.jar"/>
+	<classpathentry kind="lib" path="lib/libthrift.jar"/>
+	<classpathentry kind="lib" path="lib/log4j.jar"/>
+	<classpathentry kind="lib" path="lib/logback-classic.jar"/>
+	<classpathentry kind="lib" path="lib/logback-core.jar"/>
+	<classpathentry kind="lib" path="lib/org.apache.felix.scr.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.namespace.extender.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.namespace.implementation.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.service.component.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.service.event.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.service.prefs.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.util.function.jar"/>
+	<classpathentry kind="lib" path="lib/org.osgi.util.promise.jar"/>
+	<classpathentry kind="lib" path="lib/osgi.annotation.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-api.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-log4j12.jar"/>
+	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="lib/xml-apis.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

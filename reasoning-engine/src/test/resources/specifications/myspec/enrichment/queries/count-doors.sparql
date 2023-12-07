@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX myspec: <http://myspec#>
+
+CONSTRUCT {
+    ?s myspec:hasDoorCount ?count
+} WHERE {{
+    SELECT
+        (?storey as ?s)
+        (COUNT(?door) as ?count)
+    WHERE {
+        ?storey rdf:type myspec:Storey .
+        ?door rdf:type myspec:Door .
+        ?storey myspec:contains ?door
+    } GROUP BY (?storey)
+}}

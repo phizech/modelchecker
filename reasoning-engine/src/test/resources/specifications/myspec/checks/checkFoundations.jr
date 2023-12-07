@@ -1,0 +1,19 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+@prefix spec: <http://uibk.ac.at/se/bimclipse/reasoning/specification#>
+@prefix myspec: <http://myspec#>
+
+[ -> (myspec:checkFoundation rdf:type spec:Check) ]
+
+[
+    (?f rdf:type myspec:Foundation)
+    (?f myspec:hasThickness ?th)
+    ge(?th "825.5"^^xsd:double)
+        -> (?f myspec:checkFoundation myspec:OK)
+]
+
+[
+    (?f rdf:type myspec:Foundation)
+    (?f myspec:hasThickness ?th)
+    lessThan(?th "825.5"^^xsd:double)
+        -> (?f myspec:checkFoundation myspec:FAIL)
+]

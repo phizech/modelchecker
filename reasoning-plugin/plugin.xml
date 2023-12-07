@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+	<extension point="org.eclipse.ui.menus">
+	
+		<!-- enable reasoning on the project explorer context menu -->
+		<menuContribution locationURI="popup:org.eclipse.ui.popup.any">
+			<command commandId="ac.at.uibk.se.bimclipse.reasoning.plugin.reasoningCommand" label="Reasoning...">
+				<visibleWhen>
+					<with variable="org.eclipse.ui.selection">
+						<iterate ifEmpty="false">
+							<adapt type="org.eclipse.core.resources.IResource">
+								<test property="org.eclipse.core.resources.extension" value="ifc" />
+							</adapt>
+						</iterate>
+					</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		
+		<!-- enable reasoning from the main menu -->
+		<menuContribution locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+			<menu label="BIMClipse" id="ac.at.uibk.se.bimclipse.reasoning.plugin.mainMenuTab">
+				<command
+					commandId="ac.at.uibk.se.bimclipse.reasoning.plugin.reasoningCommand"
+					label="Reasoning..." />
+			</menu>
+		</menuContribution>
+		
+	</extension>
+	
+	<!-- create the 'reasoning' command -->
+	<extension point="org.eclipse.ui.commands">
+		<command
+			id="ac.at.uibk.se.bimclipse.reasoning.plugin.reasoningCommand"
+			name="reasoningCommand" />
+	</extension>
+	
+	<!-- create the 'reasoning' handler -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler
+			commandId="ac.at.uibk.se.bimclipse.reasoning.plugin.reasoningCommand"
+			class="at.ac.uibk.se.bimclipse.reasoning.plugin.handlers.ReasoningHandler" />
+	</extension>
+	
+</plugin>

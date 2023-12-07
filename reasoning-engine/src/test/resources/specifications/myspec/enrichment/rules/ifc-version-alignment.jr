@@ -1,0 +1,218 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+@prefix ifc2_3: <https://standards.buildingsmart.org/IFC/DEV/IFC2x3/TC1/OWL#>
+@prefix ifc4: <https://standards.buildingsmart.org/IFC/DEV/IFC4/ADD1/OWL#>
+@prefix express: <https://w3id.org/express#>
+@prefix list: <https://w3id.org/list#> .
+@prefix spec: <http://uibk.ac.at/se/bimclipse/reasoning/specification#>
+@prefix myspec: <http://myspec#>
+
+[hasId2_3:
+    (?x ifc2_3:globalId_IfcRoot ?y)
+    (?y express:hasString ?z)
+        -> (?x spec:hasId ?z)
+]
+
+[hasId4:
+    (?x ifc4:globalId_IfcRoot ?y)
+    (?y express:hasString ?z)
+        -> (?x spec:hasId ?z)
+]
+
+[ (?x rdf:type ifc2_3:IfcProduct) -> (?x rdf:type myspec:Product) ]
+[ (?x rdf:type ifc4:IfcProduct) -> (?x rdf:type myspec:Product) ]
+
+[ (?x rdf:type ifc2_3:IfcSlab) -> (?x rdf:type myspec:Slab) ]
+[ (?x rdf:type ifc4:IfcSlab) -> (?x rdf:type myspec:Slab) ]
+
+[ (?x rdf:type ifc2_3:IfcSite) -> (?x rdf:type myspec:Site) ]
+[ (?x rdf:type ifc4:IfcSite) -> (?x rdf:type myspec:Site) ]
+
+[ (?x rdf:type ifc2_3:IfcDoor) -> (?x rdf:type myspec:Door) ]
+[ (?x rdf:type ifc4:IfcDoor) -> (?x rdf:type myspec:Door) ]
+
+[ (?x rdf:type ifc2_3:IfcWall) -> (?x rdf:type myspec:Wall) ]
+[ (?x rdf:type ifc4:IfcWall) -> (?x rdf:type myspec:Wall) ]
+
+[ (?x rdf:type ifc2_3:IfcBuildingStorey) -> (?x rdf:type myspec:Storey) ]
+[ (?x rdf:type ifc4:IfcBuildingStorey) -> (?x rdf:type myspec:Storey) ]
+
+[hasHeight_door_2_3:
+    (?door rdf:type myspec:Door)
+    (?door ifc2_3:overallHeight_IfcDoor ?heightMeasure)
+    (?heightMeasure express:hasDouble ?height)
+        -> (?door myspec:hasHeight ?height)
+]
+
+[hasHeight_door_4:
+    (?door rdf:type myspec:Door)
+    (?door ifc4:overallHeight_IfcDoor ?heightMeasure)
+    (?heightMeasure express:hasDouble ?height)
+        -> (?door myspec:hasHeight ?height)
+]
+
+[hasWidth_door_2_3:
+    (?door rdf:type myspec:Door)
+    (?door ifc2_3:overallWidth_IfcDoor ?widthMeasure)
+    (?widthMeasure express:hasDouble ?width)
+        -> (?door myspec:hasWidth ?width)
+]
+
+[hasWidth_door_4:
+    (?door rdf:type myspec:Door)
+    (?door ifc4:overallWidth_IfcDoor ?widthMeasure)
+    (?widthMeasure express:hasDouble ?width)
+        -> (?door myspec:hasWidth ?width)
+]
+
+[hasOperationType_door_2_3:
+    (?propertySetAssignment rdf:type ifc2_3:IfcRelDefinesByType)
+    (?propertySetAssignment ifc2_3:relatedObjects_IfcRelDefines ?subject)
+    (?propertySetAssignment ifc2_3:relatingType_IfcRelDefinesByType ?definition)
+    (?definition rdf:type ifc2_3:IfcDoorStyle)
+    (?definition operationType_IfcDoorStyle ?type)
+        -> (?subject myspec:hasOperationType ?type)
+]
+
+[hasOperationType_door_4:
+    (?rel rdf:type ifc4:IfcRelDefinesByType)
+    (?rel ifc4:relatedObjects_IfcRelDefines ?subject)
+    (?rel ifc4:relatingType_IfcRelDefinesByType ?definition)
+    (?definition rdf:type ifc4:IfcDoorStyle)
+    (?definition operationType_IfcDoorStyle ?type)
+        -> (?subject myspec:hasOperationType ?type)
+]
+
+[slabThickness2_3:
+    (?slab rdf:type myspec:Slab)
+    (?slab ifc2_3:representation_IfcProduct ?repr)
+    (?repr ifc2_3:representations_IfcProductRepresentation ?reprs)
+    (?reprs list:hasContents ?repritem)
+    (?repritem ifc2_3:items_IfcRepresentation ?r)
+    (?r ifc2_3:depth_IfcExtrudedAreaSolid ?measure)
+    (?measure express:hasDouble ?thickness)
+        -> (?slab myspec:hasThickness ?thickness)
+]
+
+[slabThickness4:
+    (?slab rdf:type myspec:Slab)
+    (?slab ifc4:representation_IfcProduct ?repr)
+    (?repr ifc4:representations_IfcProductRepresentation ?reprs)
+    (?reprs list:hasContents ?repritem)
+    (?repritem ifc4:items_IfcRepresentation ?r)
+    (?r ifc4:depth_IfcExtrudedAreaSolid ?measure)
+    (?measure express:hasDouble ?thickness)
+        -> (?slab myspec:hasThickness ?thickness)
+]
+
+[propertyExtraction_2_3:
+    (?propertySetAssignment rdf:type ifc2_3:IfcRelDefinesByProperties)
+    (?propertySetAssignment ifc2_3:relatedObjects_IfcRelDefines ?subject)
+    (?propertySetAssignment ifc2_3:relatingPropertyDefinition_IfcRelDefinesByProperties ?propertySet)
+    (?propertySet rdf:type ifc2_3:IfcPropertySet)
+    (?propertySet ifc2_3:hasProperties_IfcPropertySet ?property)
+    (?property ifc2_3:name_IfcProperty ?propertyIdentifier)
+    (?propertyIdentifier express:hasString ?propertyKey)
+    (?property ifc2_3:nominalValue_IfcPropertySingleValue ?propertyValueLabel)
+    (?propertyValueLabel express:hasString ?propertyValue)
+        -> (?subject myspec:hasProperty ?property)
+            (?property myspec:hasKey ?propertyKey)
+            (?property myspec:hasValue ?propertyValue)
+]
+
+[propertyExtraction_4:
+    (?propertySetAssignment rdf:type ifc4:IfcRelDefinesByProperties)
+    (?propertySetAssignment ifc4:relatedObjects_IfcRelDefines ?subject)
+    (?propertySetAssignment ifc4:relatingPropertyDefinition_IfcRelDefinesByProperties ?propertySet)
+    (?propertySet rdf:type ifc4:IfcPropertySet)
+    (?propertySet ifc4:hasProperties_IfcPropertySet ?property)
+    (?property ifc4:name_IfcProperty ?propertyIdentifier)
+    (?propertyIdentifier express:hasString ?propertyKey)
+    (?property ifc4:nominalValue_IfcPropertySingleValue ?propertyValueLabel)
+    (?propertyValueLabel express:hasString ?propertyValue)
+        -> (?subject myspec:hasProperty ?property)
+            (?property myspec:hasKey ?propertyKey)
+            (?property myspec:hasValue ?propertyValue)
+]
+
+[relativeLocation2_3:
+    (?x rdf:type myspec:Product)
+    (?x ifc2_3:objectPlacement_IfcProduct ?y)
+    (?y ifc2_3:placementRelTo_IfcLocalPlacement ?relToLocation)
+    (?relTo ifc2_3:objectPlacement_IfcProduct ?relToLocation)
+    (?y ifc2_3:relativePlacement_IfcLocalPlacement ?offset)
+    (?offset ifc2_3:location_IfcPlacement ?point)
+    (?point ifc2_3:coordinates_IfcCartesianPoint ?coordinateListX)
+    (?coordinateListX list:hasNext ?coordinateListY)
+    (?coordinateListY list:hasNext ?coordinateListZ)
+    (?coordinateListX list:hasContents ?lengthMeasureX)
+    (?coordinateListY list:hasContents ?lengthMeasureY)
+    (?coordinateListZ list:hasContents ?lengthMeasureZ)
+    (?lengthMeasureX express:hasDouble ?offsetX)
+    (?lengthMeasureY express:hasDouble ?offsetY)
+    (?lengthMeasureZ express:hasDouble ?offsetZ)
+        -> (?x rdf:type myspec:ObjectWithLocation)
+            (?x myspec:isRelativeTo ?relTo)
+	    (?x myspec:hasRelativeOffsetX ?offsetX)
+	    (?x myspec:hasRelativeOffsetY ?offsetY)
+            (?x myspec:hasRelativeOffsetZ ?offsetZ)
+]
+
+[relativeLocation4:
+    (?x rdf:type myspec:Product)
+    (?x ifc4:objectPlacement_IfcProduct ?y)
+    (?y ifc4:placementRelTo_IfcLocalPlacement ?relToLocation)
+    (?relTo ifc4:objectPlacement_IfcProduct ?relToLocation)
+    (?y ifc4:relativePlacement_IfcLocalPlacement ?offset)
+    (?offset ifc4:location_IfcPlacement ?point)
+    (?point ifc4:coordinates_IfcCartesianPoint ?coordinateListX)
+    (?coordinateListX list:hasNext ?coordinateListY)
+    (?coordinateListY list:hasNext ?coordinateListZ)
+    (?coordinateListX list:hasContents ?lengthMeasureX)
+    (?coordinateListY list:hasContents ?lengthMeasureY)
+    (?coordinateListZ list:hasContents ?lengthMeasureZ)
+    (?lengthMeasureX express:hasDouble ?offsetX)
+    (?lengthMeasureY express:hasDouble ?offsetY)
+    (?lengthMeasureZ express:hasDouble ?offsetZ)
+        -> (?x rdf:type myspec:ObjectWithLocation)
+            (?x myspec:isRelativeTo ?relTo)
+	    (?x myspec:hasRelativeOffsetX ?offsetX)
+	    (?x myspec:hasRelativeOffsetY ?offsetY)
+            (?x myspec:hasRelativeOffsetZ ?offsetZ)
+]
+
+[absoluteSiteLocation:
+    (?x rdf:type myspec:Site)
+        -> (?x rdf:type myspec:ObjectWithLocation)
+	    (?x myspec:hasAbsoluteX "0.0"^^xsd:double)
+	    (?x myspec:hasAbsoluteY "0.0"^^xsd:double)
+            (?x myspec:hasAbsoluteZ "0.0"^^xsd:double)
+]
+
+[absoluteLocationComputation:
+    (?x rdf:type myspec:ObjectWithLocation)
+    (?x myspec:isRelativeTo ?relTo)
+    (?relTo myspec:hasAbsoluteX ?relToAbsX)
+    (?relTo myspec:hasAbsoluteY ?relToAbsY)
+    (?relTo myspec:hasAbsoluteZ ?relToAbsZ)
+    (?x myspec:hasRelativeOffsetX ?offsetX)
+    (?x myspec:hasRelativeOffsetY ?offsetY)
+    (?x myspec:hasRelativeOffsetZ ?offsetZ)
+    sum(?offsetX ?relToAbsX ?absX)
+    sum(?offsetY ?relToAbsY ?absY)
+    sum(?offsetZ ?relToAbsZ ?absZ)
+        -> (?x myspec:hasAbsoluteX ?absX)
+	    (?x myspec:hasAbsoluteY ?absY)
+            (?x myspec:hasAbsoluteZ ?absZ)
+]
+
+[contains2_3:
+    (?rel ifc2_3:relatingStructure_IfcRelContainedInSpatialStructure ?parent)
+    (?rel ifc2_3:relatedElements_IfcRelContainedInSpatialStructure ?child)
+        -> (?parent myspec:contains ?child)
+]
+
+[contains4:
+    (?rel ifc4:relatingStructure_IfcRelContainedInSpatialStructure ?parent)
+    (?rel ifc4:relatedElements_IfcRelContainedInSpatialStructure ?child)
+        -> (?parent myspec:contains ?child)
+]

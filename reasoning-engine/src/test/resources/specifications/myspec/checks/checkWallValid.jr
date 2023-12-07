@@ -1,0 +1,29 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+@prefix spec: <http://uibk.ac.at/se/bimclipse/reasoning/specification#>
+@prefix myspec: <http://myspec#>
+
+[ -> (myspec:checkWallValid rdf:type spec:Check) ]
+
+[checkWallValid_OK:
+    (?s rdf:type myspec:Wall)
+    (?s myspec:hasProperty ?p)
+    (?p myspec:hasKey "FireRating")
+    (?p myspec:hasValue ?v)
+    equal(?v "60")
+        -> (?s myspec:checkWallValid myspec:OK)
+]
+
+[checkWallValid_FAIL:
+    (?s rdf:type myspec:Wall)
+    (?s myspec:hasProperty ?p)
+    (?p myspec:hasKey "FireRating")
+    (?p myspec:hasValue ?v)
+    notEqual(?v "60")
+        -> (?s myspec:checkWallValid myspec:FAIL)
+]
+
+[checkWallValid_WARN:
+    (?s myspec:checkWallValid myspec:WARN) <-
+        (?s rdf:type myspec:Wall)
+        noValue(?s myspec:checkWallValid ?x)
+]

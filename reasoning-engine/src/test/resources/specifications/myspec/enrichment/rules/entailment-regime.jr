@@ -1,0 +1,3 @@
+[rdfs7:  (?a rdf:type rdfs:Class) -> (?a rdfs:subClassOf ?a)]
+[rdfs8:  (?a rdfs:subClassOf ?b), (?b rdfs:subClassOf ?c) -> (?a rdfs:subClassOf ?c)] 
+[rdfs9:  (?a rdf:type ?x), (?x rdfs:subClassOf ?y) -> (?a rdf:type ?y)]

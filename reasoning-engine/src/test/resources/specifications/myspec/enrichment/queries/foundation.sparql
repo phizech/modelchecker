@@ -1,0 +1,15 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX myspec: <http://myspec#>
+
+CONSTRUCT {
+    ?slab rdf:type myspec:Foundation
+} WHERE {
+    {
+        SELECT (MIN(?z) as ?minZ) WHERE {
+            ?s rdf:type myspec:Slab .
+            ?s myspec:hasAbsoluteZ ?z .
+        }
+    }
+    ?slab rdf:type myspec:Slab .
+    ?slab myspec:hasAbsoluteZ ?minZ .
+}

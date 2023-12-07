@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>bimclipse-reasoning-plugin</artifactId>
+	<version>1.0.0</version>
+
+	<parent>
+		<groupId>at.ac.uibk.se.bimclipse.reasoning</groupId>
+		<artifactId>bimclipse-reasoning</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<packaging>eclipse-plugin</packaging>
+
+	<properties>
+		<tycho.version>3.0.1</tycho.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>eclipse-23-03</id>
+			<url>https://download.eclipse.org/releases/2023-03/</url>
+			<layout>p2</layout>
+		</repository>
+	</repositories>
+
+	<dependencies>
+		<dependency>
+			<groupId>at.ac.uibk.se.bimclipse.reasoning</groupId>
+			<artifactId>bimclipse-reasoning-engine</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<stripVersion>true</stripVersion>
+							<outputDirectory>lib</outputDirectory>
+							<includeScope>runtime</includeScope>
+							<excludeTransitive>false</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>target</directory>
+							<directory>bin</directory>
+							<directory>lib</directory>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<environments>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

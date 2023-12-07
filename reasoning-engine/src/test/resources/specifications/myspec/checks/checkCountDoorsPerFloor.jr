@@ -1,0 +1,11 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+@prefix spec: <http://uibk.ac.at/se/bimclipse/reasoning/specification#>
+@prefix myspec: <http://myspec#>
+
+[ -> (myspec:checkDoorCount rdf:type spec:Check) ]
+
+[checkDoorValid_OK:
+    (?s rdf:type myspec:Storey)
+    (?s myspec:hasDoorCount ?c)
+        -> (?s myspec:checkDoorCount ?c)
+]

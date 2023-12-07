@@ -1,0 +1,19 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+@prefix spec: <http://uibk.ac.at/se/bimclipse/reasoning/specification#>
+@prefix myspec: <http://myspec#>
+
+[ -> (myspec:check_IBC_2015_Section_1010_a rdf:type spec:Check) ]
+
+[check_IBC_2015_Section_1010_a_OK:
+    (?s rdf:type myspec:Door)
+    (?s myspec:hasHeight ?h)
+    ge(?h, "2032"^^xsd:double)
+        -> (?s myspec:check_IBC_2015_Section_1010_a myspec:OK)
+]
+
+[check_IBC_2015_Section_1010_a_FAIL:
+    (?s rdf:type myspec:Door)
+    (?s myspec:hasHeight ?h)
+    lessThan(?h, "2032"^^xsd:double)
+        -> (?s myspec:check_IBC_2015_Section_1010_a myspec:FAIL)
+]
